@@ -1,0 +1,58 @@
+Arguments: 
+  /usr/local/bin/node /usr/local/Cellar/yarn/1.6.0/libexec/bin/yarn.js client
+
+PATH: 
+  /usr/local/sbin:/usr/local/bin:/opt/local/bin:/opt/local/sbin:/usr/bin:/usr/sbin:/bin:/usr/local/bin:/sbin:/opt/x11/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+
+Yarn version: 
+  1.6.0
+
+Node version: 
+  8.9.4
+
+Platform: 
+  darwin x64
+
+Trace: 
+  SyntaxError: /Users/jonasbarsten/Documents/node/puff-node/package.json: Unexpected token } in JSON at position 569
+      at JSON.parse (<anonymous>)
+      at /usr/local/Cellar/yarn/1.6.0/libexec/lib/cli.js:1130:59
+      at Generator.next (<anonymous>)
+      at step (/usr/local/Cellar/yarn/1.6.0/libexec/lib/cli.js:98:30)
+      at /usr/local/Cellar/yarn/1.6.0/libexec/lib/cli.js:109:13
+      at <anonymous>
+
+npm manifest: 
+  {
+    "name": "puff-node",
+    "version": "1.0.0",
+    "description": "",
+    "main": "server.js",
+    "dependencies": {
+      "artnet": "^1.4.0",
+      "bonjour": "^3.5.0",
+      "connect": "^3.6.5",
+      "easymidi": "0.0.4",
+      "log-update": "^2.3.0",
+      "midi": "^0.9.5",
+      "node-osc": "^2.1.0",
+      "osc": "^2.2.1",
+      "osc-js": "^1.2.2",
+      "rpi-gpio": "^0.9.1",
+      "serve-static": "^1.13.1"
+    },
+    "devDependencies": {},
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "client": "cd client && yarn start",
+      "server": "nodemon server.js",
+    },
+    "author": "Jonas Barsten",
+    "license": "ISC"
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
