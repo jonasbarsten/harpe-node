@@ -28,10 +28,15 @@ exports.rotate = (channel, value) => {
 	console.log(channel);
 	console.log(value);
 
-  if (value < 0 || value > 1) {
-    console.log('Value less than 0 or more than 1');
+  if (Number(value) < 0 || Number(value) > 1) {
+    console.log('Value must be between 0 and 1');
+    return;
+  };
+
+  if (Number(channel) < 0 || Number(channel) > 15) {
+    console.log('Channel must be from 0 to 15');
     return;
   }
 
-	pwm.setDutyCycle(Number(channel), value);
+	pwm.setDutyCycle(channel, value);
 };
