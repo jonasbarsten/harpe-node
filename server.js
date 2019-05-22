@@ -253,7 +253,7 @@ osc.listen((message, info) => {
   };
 
   if (department == 'pwm') {
-
+    pwm.rotate(0, value);
   }
 
   // let globalLayer = false;
