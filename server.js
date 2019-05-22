@@ -1,13 +1,14 @@
 'use strict';
 
-var io = require('socket.io')();
-var os = require('os');
-var moment = require('moment');
-var shell = require('shelljs');
+const io = require('socket.io')();
+const os = require('os');
+const moment = require('moment');
+const shell = require('shelljs');
 
 // var ledController = require('./modules/ledController.js');
-var osc = require('./modules/osc.js');
-var midi = require('./modules/midi.js');
+const osc = require('./modules/osc.js');
+const midi = require('./modules/midi.js');
+const pwm = require('./modules/pwm.js');
 
 // const programMap = require('./modules/programMap.js').content;
 
@@ -201,12 +202,12 @@ osc.listen((message, info) => {
 
   const messageArray = message.address.split("/");
 
-  const item = messageArray[1] // puff
+  const item = messageArray[1] // harp
   const ip = messageArray[2]; // 10.0.128.142 ...
-  const department = messageArray[3] // lights, cableLight, ping, update, orientation or piezo
-  const lightsGroup = messageArray[4]; // layer or global
-  const layerNumber = messageArray[5]; // 1, 2, 3, 4 ...
-  const layerFunc = messageArray[6]; // start, stop, speed, color, program, piezo, magneticNorth, preOffset or postOffset
+  const department = messageArray[3] // pwm, ping, update
+  // const lightsGroup = messageArray[4]; // layer or global
+  // const layerNumber = messageArray[5]; // 1, 2, 3, 4 ...
+  // const layerFunc = messageArray[6]; // start, stop, speed, color, program, piezo, magneticNorth, preOffset or postOffset
   let value = null;
 
   if (message && message.args[0]) {
@@ -221,7 +222,7 @@ osc.listen((message, info) => {
     }
   };
 
-  const validIncommingDepartments = ['lights', 'ping', 'update', 'cableLight'];
+  const validIncommingDepartments = ['pwm', 'ping', 'update'];
 
   if (validIncommingDepartments.indexOf(department) == -1) {
     return;
@@ -251,11 +252,15 @@ osc.listen((message, info) => {
     }
   };
 
-  let globalLayer = false;
+  if (department == 'pwm') {
 
-  if (ip == 'all') {
-    globalLayer = true;
   }
+
+  // let globalLayer = false;
+
+  // if (ip == 'all') {
+  //   globalLayer = true;
+  // }
 
   // if (department == 'cableLight') {
   //   let velocity = Math.round(127 * value);
