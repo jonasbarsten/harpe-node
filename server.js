@@ -202,7 +202,8 @@ osc.listen((message, info) => {
 
   const item = messageArray[1] // harp
   const ip = messageArray[2]; // 10.0.128.142 ...
-  const department = messageArray[3] // pwm, ping, update
+  const department = messageArray[3]; // pwm, ping, update
+  const subId = messageArray[3]; // 1, 2, 3, 4, 5 ...
   // const lightsGroup = messageArray[4]; // layer or global
   // const layerNumber = messageArray[5]; // 1, 2, 3, 4 ...
   // const layerFunc = messageArray[6]; // start, stop, speed, color, program, piezo, magneticNorth, preOffset or postOffset
@@ -258,9 +259,18 @@ osc.listen((message, info) => {
   };
 
   if (department == 'pwm') {
-    console.log(value);
+    
+    console.log('Value: ' + value);
+    
+    if (value < 0 || value > 1) {
+      console.log('Value less than 0 or more than 1');
+      return;
+    }
 
-    pwm.rotate(0, value);
+    let channel = subId ? subId : 0;
+    console.log('Channel: ' + channel);
+
+    pwm.rotate(channel, value);
   }
 
   // let globalLayer = false;
