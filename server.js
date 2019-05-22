@@ -260,7 +260,7 @@ osc.listen((message, info) => {
   if (department == 'pwm') {
     console.log(value);
 
-    pwm.rotate(0, Number(value));
+    pwm.rotate(0, value);
   }
 
   // let globalLayer = false;
