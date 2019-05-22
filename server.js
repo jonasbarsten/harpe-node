@@ -200,9 +200,9 @@ osc.listen((message, info) => {
 
   const messageArray = message.address.split("/");
 
-  const item = messageArray[1] // harp
-  const ip = messageArray[2]; // 10.0.128.142 ...
-  const department = messageArray[3] // pwm, ping, update
+  const item = messageArray[0] // harp
+  const ip = messageArray[1]; // 10.0.128.142 ...
+  const department = messageArray[2] // pwm, ping, update
   // const lightsGroup = messageArray[4]; // layer or global
   // const layerNumber = messageArray[5]; // 1, 2, 3, 4 ...
   // const layerFunc = messageArray[6]; // start, stop, speed, color, program, piezo, magneticNorth, preOffset or postOffset
