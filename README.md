@@ -4,34 +4,34 @@ Broadcast on port `8050`, both in and out.
 
 ex. in Max/MSP: `[udpsend 10.0.255.255 8050]` and `[udpreceive 8050]`
 
-This works in association with the [client repo](https://github.com/jonasbarsten/puff-client)
+This works in association with the [client repo](https://github.com/jonasbarsten/harp-client)
 
 |OUT|||
 |---|---|---|
-|/puff/`{ip}`/piezo/{0-7}|velocity 0.-1.|Float|
-|/puff/`{ip}`/orientation|0 - 360 degrees|Int|
-|/puff/`{ip}`/ping|date|Int `Unix timestamp`|
-|/puff/`{ip}`/error|message|String|
+|/harp/`{ip}`/piezo/{0-7}|velocity 0.-1.|Float|
+|/harp/`{ip}`/orientation|0 - 360 degrees|Int|
+|/harp/`{ip}`/ping|date|Int `Unix timestamp`|
+|/harp/`{ip}`/error|message|String|
 |/ableton/`{ip}`/volume|Float `0. - 1.`|---|
 |/ableton/`{ip}`/bpm|Int|---|
 
 |IN|VALUE|DEFAULT|
 |---|---|---|
-|/puff/`{ip}`/update|`see below`|
-|/puff/`{ip}`/cableLight|Float|
-|/puff/`{ip}`/lights/global|clearAll|
-|/puff/`{ip}`/lights/global/master|Float `0. - 1.`|1.|
-|/puff/`{ip}`/lights/layer/{i}/start||false|
-|/puff/`{ip}`/lights/layer/{i}/stop||true|
-|/puff/`{ip}`/lights/layer/{i}/master|Float `0. - 1.`|1.|
-|/puff/`{ip}`/lights/layer/{i}/speed|Int `ms to next tic`|500|
-|/puff/`{ip}`/lights/layer/{i}/color|String `"255 255 255 255"`|10 10 10 10|
-|/puff/`{ip}`/lights/layer/{i}/program|String `line-s/line-n/line-e/line-w/line-ne/line-nw/line-se/line-sw/random/randomTwo/randomThree/randomFour/randomFive/randomSix/allOn/allOff`|line-s|
-|/puff/`{ip}`/lights/layer/{i}/dim|Not implemented yet|??|
-|/puff/`{ip}`/lights/layer/{i}/piezo|Boolean|false|
-|/puff/`{ip}`/lights/layer/{i}/magneticNorth|Boolean|false|
-|/puff/`{ip}`/lights/layer/{i}/preOffset|Int `tics`|0|
-|/puff/`{ip}`/lights/layer/{i}/postOffset|Int `tics`|0|
+|/harp/`{ip}`/update|`see below`|
+|/harp/`{ip}`/cableLight|Float|
+|/harp/`{ip}`/lights/global|clearAll|
+|/harp/`{ip}`/lights/global/master|Float `0. - 1.`|1.|
+|/harp/`{ip}`/lights/layer/{i}/start||false|
+|/harp/`{ip}`/lights/layer/{i}/stop||true|
+|/harp/`{ip}`/lights/layer/{i}/master|Float `0. - 1.`|1.|
+|/harp/`{ip}`/lights/layer/{i}/speed|Int `ms to next tic`|500|
+|/harp/`{ip}`/lights/layer/{i}/color|String `"255 255 255 255"`|10 10 10 10|
+|/harp/`{ip}`/lights/layer/{i}/program|String `line-s/line-n/line-e/line-w/line-ne/line-nw/line-se/line-sw/random/randomTwo/randomThree/randomFour/randomFive/randomSix/allOn/allOff`|line-s|
+|/harp/`{ip}`/lights/layer/{i}/dim|Not implemented yet|??|
+|/harp/`{ip}`/lights/layer/{i}/piezo|Boolean|false|
+|/harp/`{ip}`/lights/layer/{i}/magneticNorth|Boolean|false|
+|/harp/`{ip}`/lights/layer/{i}/preOffset|Int `tics`|0|
+|/harp/`{ip}`/lights/layer/{i}/postOffset|Int `tics`|0|
 
 |RESERVED|LAYER||
 |---|---|---|
@@ -43,7 +43,7 @@ This works in association with the [client repo](https://github.com/jonasbarsten
 * layer 100 = `piezo`
 * change `{ip}` to `all` to address all available puffs
 * when running `update all` from the front it will send a OSC update command to all available puffs.
-* the update command consists of `cd`, `git pull` and `sudo reboot` on both the `puff-node` and `puff-client` repos.
+* the update command consists of `cd`, `git pull` and `sudo reboot` on both the `harp-node` and `harp-client` repos.
 
 NB: piezos will use the first 30 seconds after boot to calibrate them self, so no touching the first 30 sec!!
 
@@ -51,15 +51,15 @@ NB: piezos will use the first 30 seconds after boot to calibrate them self, so n
 
 |NAME|MAC|IP|
 |---|---|---|
-|puff-1|b8:27:eb:6d:6d:d9|10.0.128.121|
-|puff-2|b8:27:eb:ba:3e:3e|10.0.128.129|
-|puff-3|b8:27:eb:63:69:1b|10.0.128.131|
-|puff-4|b8:27:eb:4d:54:e6|10.0.128.139|
-|puff-5|b8:27:eb:14:e9:2b|10.0.128.140|
-|puff-6|b8:27:eb:d6:f7:cb|10.0.128.142|
-|puff-7|b8:27:eb:5d:1d:59|10.0.128.119|
-|puff-8|b8:27:eb:5c:75:90|10.0.128.145|
-|puff-9|b8:27:eb:a2:0c:7d|10.0.128.126|
+|harp-1|b8:27:eb:6d:6d:d9|10.0.128.121|
+|harp-2|b8:27:eb:ba:3e:3e|10.0.128.129|
+|harp-3|b8:27:eb:63:69:1b|10.0.128.131|
+|harp-4|b8:27:eb:4d:54:e6|10.0.128.139|
+|harp-5|b8:27:eb:14:e9:2b|10.0.128.140|
+|harp-6|b8:27:eb:d6:f7:cb|10.0.128.142|
+|harp-7|b8:27:eb:5d:1d:59|10.0.128.119|
+|harp-8|b8:27:eb:5c:75:90|10.0.128.145|
+|harp-9|b8:27:eb:a2:0c:7d|10.0.128.126|
 
 * Subnetmask: 255.255.0.0
 * Router: 10.0.0.1
@@ -77,10 +77,10 @@ Puffs MUST be connected after main rack has booted!
 
 ## Front repo:
 
-The same front lives on all puffs and they know about each outher due to OSC ping broadcast, so the same front with the same content can be seen on port 5000 on any puff. 
+The same front lives on all puffs and they know about each outher due to OSC ping broadcast, so the same front with the same content can be seen on port 5000 on any harp. 
 
-* [client repo](https://github.com/jonasbarsten/puff-client)
-* Puff GUI: http://puff.local:5000
+* [client repo](https://github.com/jonasbarsten/harp-client)
+* Puff GUI: http://harp.local:5000
 
 Deploy:
 
@@ -101,9 +101,9 @@ SD cards created with [etcher](https://etcher.io/)
 After flash:
 
 ```
-cd ~/puff-node
+cd ~/harp-node
 git pull
-cd ~/puff-client
+cd ~/harp-client
 git pull
 ```
 
@@ -112,8 +112,8 @@ git pull
 ```
 export PATH=/sbin:/usr/sbin:$PATH
 
-su pi -c 'serve -s /home/pi/puff-client/build' &
-su pi -c 'nodemon /home/pi/puff-node/server.js'
+su pi -c 'serve -s /home/pi/harp-client/build' &
+su pi -c 'nodemon /home/pi/harp-node/server.js'
 
 exit 0
 ```
