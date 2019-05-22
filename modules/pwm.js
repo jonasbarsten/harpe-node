@@ -24,24 +24,6 @@ const pwm = new Pca9685Driver(options, function(err) {
 });
 
 exports.rotate = (channel, value) => {
-
-	console.log(channel);
-	console.log(value);
-
-	let validChannel = true;
-	let validValue = true;
-
-  if (Number(value) < 0 || Number(value) > 1) {
-    console.log('Value must be between 0 and 1');
-    validValue = false;
-  };
-
-  if (Number(channel) < 0 || Number(channel) > 15) {
-    console.log('Channel must be from 0 to 15');
-    validChannel = false;
-  }
-
-  if (validChannel && validValue) {
-  	pwm.setDutyCycle(channel, value);
-  }
+	// TODO: validation
+  pwm.setDutyCycle(channel, value);
 };
