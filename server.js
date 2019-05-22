@@ -208,6 +208,10 @@ osc.listen((message, info) => {
   // const layerFunc = messageArray[6]; // start, stop, speed, color, program, piezo, magneticNorth, preOffset or postOffset
   let value = null;
 
+  console.log(item);
+  console.log(ip);
+  console.log(department);
+
   if (message && message.args[0]) {
     if (message.args.length > 1) {
       const valueArray = [];
