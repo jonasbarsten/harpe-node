@@ -198,8 +198,6 @@ let state = {
 osc.listen((message, info) => {
   state.lastOsc = {message, info};
 
-  console.log(state);
-
   const messageArray = message.address.split("/");
 
   const item = messageArray[1] // harp
@@ -253,7 +251,9 @@ osc.listen((message, info) => {
   };
 
   if (department == 'pwm') {
-    pwm.rotate(0, value);
+    console.log(value);
+
+    pwm.rotate(0, Number(value));
   }
 
   // let globalLayer = false;
