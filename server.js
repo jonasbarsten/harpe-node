@@ -208,10 +208,10 @@ osc.listen((message, info) => {
   // const layerFunc = messageArray[6]; // start, stop, speed, color, program, piezo, magneticNorth, preOffset or postOffset
   let value = null;
 
-  console.log('message: ' + messageArray);
-  console.log('item: ' + item);
-  console.log('ip: ' + ip);
-  console.log('department: ' + department);
+  // console.log('message: ' + messageArray);
+  // console.log('item: ' + item);
+  // console.log('ip: ' + ip);
+  // console.log('department: ' + department);
 
   if (message && message.args[0]) {
     if (message.args.length > 1) {
@@ -225,7 +225,7 @@ osc.listen((message, info) => {
     }
   };
 
-  console.log('value: ' + value);
+  // console.log('value: ' + value);
 
   const validIncommingDepartments = ['pwm', 'ping', 'update'];
 
