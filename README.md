@@ -18,6 +18,8 @@ This works in association with the [client repo](https://github.com/jonasbarsten
 |IN|VALUE|DEFAULT|
 |---|---|---|
 |/harp/`{ip}`/update|`see below`|
+|/harp/`{ip}`/pwm/{i}|Float|
+|-----|-----|-----|
 |/harp/`{ip}`/cableLight|Float|
 |/harp/`{ip}`/lights/global|clearAll|
 |/harp/`{ip}`/lights/global/master|Float `0. - 1.`|1.|
