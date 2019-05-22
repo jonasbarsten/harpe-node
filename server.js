@@ -259,17 +259,7 @@ osc.listen((message, info) => {
   };
 
   if (department == 'pwm') {
-    
-    console.log('Value: ' + value);
-    
-    if (value < 0 || value > 1) {
-      console.log('Value less than 0 or more than 1');
-      return;
-    }
-
-    let channel = subId ? subId : 0;
-    console.log('Channel: ' + channel);
-
+    const channel = subId ? subId : 0;
     pwm.rotate(channel, value);
   }
 
