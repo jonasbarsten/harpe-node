@@ -1,6 +1,4 @@
-'use strict';
-
-var osc = require('osc');
+const osc = require('osc');
 
 let oscPortReady = false;
 let outAddress = "192.168.1.255";
