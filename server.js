@@ -5,7 +5,7 @@ const shell = require('shelljs');
 const fs = require('fs');
 
 const osc = require('./modules/osc.js');
-const midi = require('./modules/midi.js');
+// const midi = require('./modules/midi.js');
 const pwm = require('./modules/pwm.js');
 
 const update = () => {
