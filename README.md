@@ -62,9 +62,9 @@ SD cards created with [etcher](https://etcher.io/)
 After flash:
 
 ```
-cd ~/harp-node
+cd ~/harpe-node
 git pull
-cd ~/harp-client
+cd ~/harpe-client
 git pull
 ```
 
@@ -78,3 +78,10 @@ su pi -c 'nodemon /home/pi/harp-node/server.js'
 
 exit 0
 ```
+
+Debug:
+
+* Comment out the two `su pi -c ...` lines.
+* Reboot
+* cd ~/harpe-node
+* node server.js debug
