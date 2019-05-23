@@ -23,5 +23,7 @@ const pwm = new Pca9685Driver(options, function(err) {
 
 exports.rotate = (channel, value) => {
 	// TODO: validation
+	console.log(channel);
+	console.log(value);
   pwm.setDutyCycle(channel, value);
 };
