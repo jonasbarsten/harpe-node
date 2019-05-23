@@ -79,7 +79,7 @@ const getIp = () => {
 let state = {
   // cableLight: 0,
   // activeLayers: {},
-  id: fs.readFileSync('/home/pi/id').toString() || 0,
+  id: fs.readFileSync('/home/pi/id', 'utf8') || 0,
   lastMidi: {},
   lastOsc: {},
   localIp: getIp(),
