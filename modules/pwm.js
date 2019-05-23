@@ -27,21 +27,19 @@ exports.rotate = (channel, value) => {
 	const numberValue = Number(value);
 
 	if (numberValue < 0 || numberValue > 1) {
-		console.log('PWM value must be between 0. and 1.');
+		console.log(`PWM value must be between 0. and 1. (got ${numberValue})`);
 		return;
 	}
 
 	if (numberChannel < 0 || numberChannel > 15) {
-		console.log('PWM channel must be between 0 and 15');
+		console.log(`PWM channel must be between 0 and 15 (got ${numberChannel})`);
 		return;
 	}
 
 	if (numberChannel % 1 != 0) {
-		console.log('PWM channel must be a whole number');
+		console.log(`PWM channel must be a whole number (got ${numberChannel})`);
 		return;
 	}
-	// TODO: validation
-	console.log(channel);
-	console.log(value);
+
   pwm.setDutyCycle(numberChannel, numberValue);
 };

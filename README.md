@@ -2,7 +2,7 @@
 
 Broadcast on port `8050`, both in and out.
 
-ex. in Max/MSP: `[udpsend 10.0.0.255 8050]` and `[udpreceive 8050]`
+ex. in Max/MSP: `[udpsend 192.168.1.255 8050]` and `[udpreceive 8050]`
 
 This works in association with the [client repo](https://github.com/jonasbarsten/harp-client)
 
@@ -41,7 +41,7 @@ This works in association with the [client repo](https://github.com/jonasbarsten
 The same front lives on all harps and they know about each outher due to OSC ping broadcast, so the same front with the same content can be seen on port 5000 on any harp. 
 
 * [client repo](https://github.com/jonasbarsten/harp-client)
-* Puff GUI: http://harp.local:5000
+* Harp GUI: http://`{any harp ip}`:5000
 
 Deploy:
 
