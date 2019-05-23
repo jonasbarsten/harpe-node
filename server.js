@@ -2,6 +2,7 @@ const io = require('socket.io')();
 const os = require('os');
 const moment = require('moment');
 const shell = require('shelljs');
+const fs = require('fs');
 
 // var ledController = require('./modules/ledController.js');
 const osc = require('./modules/osc.js');
@@ -68,9 +69,17 @@ const getIp = () => {
   return addresses[0];
 };
 
+// TODO: Get ID from text-doc in user folder
+// Do all the validation
+// Initial ID is 0
+// Show warning if ID is 0 and tell user to change it
+// Change ID from GUI (rewrite file)
+// If some other harp has the same ID show error
+
 let state = {
   // cableLight: 0,
   // activeLayers: {},
+  id: fs.readFileSync('/home/pi/id') || 0,
   lastMidi: {},
   lastOsc: {},
   localIp: getIp(),
@@ -82,6 +91,8 @@ let state = {
   // piezoMax: [0,0,0,0,0,0,0,0],
   // piezoSumMax: 0
 };
+
+console.log(state);
 
 // const fadeCable = (amount) => {
 //   state.cableLight = state.cableLight + amount;
