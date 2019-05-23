@@ -69,10 +69,9 @@ const getIp = () => {
   return addresses[0];
 };
 
-// TODO: Get ID from text-doc in user folder
+// TODO:
 // Do all the validation
 // Initial ID is 0
-// Show warning if ID is 0 and tell user to change it
 // Change ID from GUI (rewrite file)
 // If some other harp has the same ID show error
 
@@ -90,6 +89,10 @@ let state = {
   // disabledPiezos: [],
   // piezoMax: [0,0,0,0,0,0,0,0],
   // piezoSumMax: 0
+};
+
+if (state.id == 0) {
+  console.log('Set harp ID! (in /home/pi/id)');
 };
 
 // const fadeCable = (amount) => {
