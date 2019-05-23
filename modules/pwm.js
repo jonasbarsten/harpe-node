@@ -1,5 +1,7 @@
 const i2cBus = require("i2c-bus");
 const Pca9685Driver = require("pca9685").Pca9685Driver;
+
+const debug = (process.argv[2] == 'debug') ? true : false;
  
 const options = {
 	i2c: i2cBus.openSync(1),
@@ -39,6 +41,11 @@ exports.rotate = (channel, value) => {
 	if (numberChannel % 1 != 0) {
 		console.log(`PWM channel must be a whole number (got ${numberChannel})`);
 		return;
+	}
+
+	if (debug) {
+		console.log(`Outgoing PWM channel: ${numberChannel}`);
+		console.log(`Outgoing PWM value: ${numberValue}`);
 	}
 
   pwm.setDutyCycle(numberChannel, numberValue);
