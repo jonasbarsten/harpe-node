@@ -77,6 +77,8 @@ let state = {
   neighbours: []
 };
 
+console.log(`Harp ID: ${state.id}`);
+
 if (state.id == 0) {
   console.log('Set harp ID! (in /home/pi/id)');
 };
