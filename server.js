@@ -92,8 +92,6 @@ let state = {
   // piezoSumMax: 0
 };
 
-console.log(state);
-
 // const fadeCable = (amount) => {
 //   state.cableLight = state.cableLight + amount;
 //   midi.noteSend(0, state.cableLight, 1);
@@ -210,7 +208,8 @@ osc.listen((message, info) => {
   const messageArray = message.address.split("/");
 
   const item = messageArray[1] // harp
-  const ip = messageArray[2]; // 10.0.128.142 ...
+  // const ip = messageArray[2]; // 10.0.128.142 ...
+  const id = messageArray[2]; // 1, 2, 3, 4, 5 ...
   const department = messageArray[3]; // pwm, ping, update
   const subId = messageArray[4]; // 1, 2, 3, 4, 5 ...
   // const lightsGroup = messageArray[4]; // layer or global
@@ -246,12 +245,12 @@ osc.listen((message, info) => {
   if (department == 'ping') {
 
     const position = state.neighbours.map((neighbour) => { 
-      return neighbour.ip; 
-    }).indexOf(ip);
+      return neighbour.id; 
+    }).indexOf(id);
     
     if (position == -1) {
       state.neighbours.push({
-        ip: ip,
+        id: id,
         lastSeen: value
       });
     } else {
@@ -261,8 +260,8 @@ osc.listen((message, info) => {
   };
 
   // Break if message isn't intended for current server
-  if (state.localIp != ip || item != 'harp') {
-    if (ip != 'all') {
+  if (state.id != id || item != 'harp') {
+    if (id != 'all') {
       return;
     }
   };
@@ -469,11 +468,11 @@ osc.listen((message, info) => {
 // };
 
 setInterval(() => {
-  state.localIp = getIp();
+  // state.localIp = getIp();
   const now = moment().valueOf();
 
   // Send alive ping to network
-  osc.send(`/harp/${state.localIp}/ping`, [
+  osc.send(`/harp/${state.id}/ping`, [
     {
       type: "s",
       value: now
