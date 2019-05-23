@@ -1,14 +1,12 @@
-'use strict';
-
-var io = require('socket.io')();
-var os = require('os');
-var moment = require('moment');
-var shell = require('shelljs');
+const io = require('socket.io')();
+const os = require('os');
+const moment = require('moment');
+const shell = require('shelljs');
 
 // var ledController = require('./modules/ledController.js');
-var osc = require('./modules/osc.js');
-var midi = require('./modules/midi.js');
-var pwm = require('./modules/pwm.js');
+const osc = require('./modules/osc.js');
+const midi = require('./modules/midi.js');
+const pwm = require('./modules/pwm.js');
 
 // const programMap = require('./modules/programMap.js').content;
 
