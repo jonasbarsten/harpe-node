@@ -3,7 +3,7 @@
 var osc = require('osc');
 
 let oscPortReady = false;
-let outAddress = "10.0.255.255";
+let outAddress = "192.168.1.255";
 let outPort = 8050;
 let inPort = 8050;
 let udpPort = null;
