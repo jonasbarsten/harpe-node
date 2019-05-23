@@ -25,5 +25,5 @@ exports.rotate = (channel, value) => {
 	// TODO: validation
 	console.log(channel);
 	console.log(value);
-  pwm.setDutyCycle(channel, value);
+  pwm.setDutyCycle(Number(channel), Number(value));
 };
