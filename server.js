@@ -135,6 +135,7 @@ osc.listen((message, info) => {
     if (position == -1) {
       state.neighbours.push({
         id: id,
+        ip: localIp,
         lastSeen: value
       });
     } else {
@@ -167,7 +168,7 @@ setInterval(() => {
   const now = moment().valueOf();
 
   // Send alive ping to network
-  osc.send(`/harp/${state.id}/ping`, [
+  osc.send(`/harp/${state.localIp}/ping`, [
     {
       type: "s",
       value: now
