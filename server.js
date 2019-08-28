@@ -25,6 +25,10 @@ io.on('connection', (client) => {
   // client.on('runFunction', (functionName, args) => {
   //   ledController[functionName](...args);
   // });
+  client.on('pwm', (channel, value) => {
+    console.log('Channel: ' + channel);
+    console.log('Value: ' + value);
+  });
   client.on('restart', () => {
     shell.exec('sudo reboot');
   });
