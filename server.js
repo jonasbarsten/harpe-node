@@ -26,6 +26,7 @@ io.on('connection', (client) => {
   //   ledController[functionName](...args);
   // });
   client.on('pwm', (channel, value) => {
+    console.log('PWM PWM PWM');
     console.log('Channel: ' + channel);
     console.log('Value: ' + value);
   });
