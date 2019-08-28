@@ -104,7 +104,7 @@ osc.listen((message, info) => {
   const messageArray = message.address.split("/");
   const item = messageArray[1] // harp
   const id = messageArray[2]; // 1, 2, 3, 4, 5 ...
-  const department = messageArray[3]; // pwm, ping, update
+  const department = messageArray[3]; // pwm, ping, update, ip
   const subId = messageArray[4]; // 1, 2, 3, 4, 5 ...
   let value = null;
 
@@ -120,7 +120,7 @@ osc.listen((message, info) => {
     }
   };
 
-  const validIncommingDepartments = ['pwm', 'ping', 'update'];
+  const validIncommingDepartments = ['pwm', 'ping', 'update', 'ip'];
 
   if (validIncommingDepartments.indexOf(department) == -1) {
     return;
@@ -142,6 +142,23 @@ osc.listen((message, info) => {
     };
     return;
   };
+
+  if (department == 'ip') {
+
+    const position = state.neighbours.map((neighbour) => { 
+      return neighbour.id; 
+    }).indexOf(id);
+
+    if (position == -1) {
+      state.neighbours.push({
+        id: id,
+        ip: value
+      });
+    } else {
+      state.neighbours[position].ip = value;
+    };
+    return;
+  }
 
   // Break if message isn't intended for current server
   if (state.id != id || item != 'harp') {
