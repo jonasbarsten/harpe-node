@@ -26,14 +26,7 @@ io.on('connection', (client) => {
   //   ledController[functionName](...args);
   // });
   client.on('pwm', (channel, value) => {
-    console.log('PWM PWM PWM');
-    console.log('Channel: ' + channel);
-    console.log('Value: ' + value);
-
     const scaledValue = value / 1000;
-
-    console.log('Scaled value : ' + scaledValue);
-
     pwm.rotate(channel, scaledValue);
   });
   client.on('restart', () => {
