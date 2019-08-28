@@ -78,6 +78,7 @@ let state = {
 };
 
 console.log(`Harp ID: ${state.id}`);
+console.log(`Harp IP: ${state.localIp}`);
 
 if (state.id == 0) {
   console.log('Set harp ID! (in /home/pi/id)');
