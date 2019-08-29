@@ -14,7 +14,7 @@ const pwm = new Pca9685Driver(options, function(err) {
 		// process.exit(-1);
   }
 
-  console.log("PWM initialization done");
+  // console.log("PWM initialization done");
 
   // pwm.setPulseRange(0, 42, 255);
   // pwm.setPulseLength(0, 1500);
