@@ -3,6 +3,45 @@ const os = require('os');
 const moment = require('moment');
 const shell = require('shelljs');
 const fs = require('fs');
+const Gpio = require('onoff').Gpio;
+const led = new Gpio(2, 'out');
+
+let stopBlinking = false;
+ 
+// Toggle the state of the LED connected to GPIO17 every 200ms
+const blinkLed = () => {
+
+  console.log('Boom');
+
+  if (stopBlinking) {
+    return led.unexport();
+  }
+ 
+  led.read((err, value) => { // Asynchronous read
+    if (err) {
+      throw err;
+    }
+ 
+    led.write(value ^ 1, err => { // Asynchronous write
+      if (err) {
+        throw err;
+      }
+
+      console.log('Biiiiiim');
+
+    });
+  });
+ 
+  setTimeout(blinkLed, 200);
+};
+ 
+blinkLed();
+
+
+
+
+
+
 
 const osc = require('./modules/osc.js');
 // const midi = require('./modules/midi.js');
