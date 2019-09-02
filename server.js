@@ -45,7 +45,7 @@ blinkLed();
 
 const osc = require('./modules/osc.js');
 // const midi = require('./modules/midi.js');
-const pwm = require('./modules/pwm.js');
+let pwm = null;
 
 const update = () => {
   shell.exec('cd /home/pi/harpe-node && git pull && npm install && cd /home/pi/harpe-client && git pull && sudo reboot');
@@ -126,6 +126,15 @@ console.log(`Harp IP: ${state.localIp}`);
 if (state.id == 0) {
   console.log('Set harp ID! (in /home/pi/id)');
 };
+
+if (state.id <= 6) {
+  pwm = require('./modules/pwm.js');
+  console.log('This is a ebow module');
+} else if (state.id <= 12) {
+  console.log('This is a solenoid module');
+} else {
+  console.log('Not a valid ID');
+}
 
 // setTimeout(() => {
 //   midi.ccListen((controller, value) => {
