@@ -4,7 +4,7 @@ const moment = require('moment');
 const shell = require('shelljs');
 const fs = require('fs');
 const Gpio = require('onoff').Gpio;
-const led = new Gpio(3, 'out');
+const led = new Gpio(4, 'out');
 
 let stopBlinking = false;
  
