@@ -4,30 +4,48 @@ const moment = require('moment');
 const shell = require('shelljs');
 const fs = require('fs');
 const Gpio = require('onoff').Gpio;
-const led = new Gpio(4, 'out');
-
-let stopBlinking = false;
+const solOne = new Gpio(2, 'out');
+const solTwo = new Gpio(3, 'out');
+const solThree = new Gpio(4, 'out');
  
 // Toggle the state of the LED connected to GPIO17 every 200ms
 const blinkLed = () => {
-
-  console.log('Boom');
-
-  if (stopBlinking) {
-    return led.unexport();
-  }
  
-  led.read((err, value) => { // Asynchronous read
+  solOne.read((err, value) => { // Asynchronous read
     if (err) {
       throw err;
     }
  
-    led.write(value ^ 1, err => { // Asynchronous write
+    solOne.write(value ^ 1, err => { // Asynchronous write
       if (err) {
         throw err;
       }
 
-      console.log('Biiiiiim');
+    });
+  });
+
+  solTwo.read((err, value) => { // Asynchronous read
+    if (err) {
+      throw err;
+    }
+  
+    solTwo.write(value ^ 1, err => { // Asynchronous write
+      if (err) {
+        throw err;
+      }
+
+    });
+  });
+
+  solThree.read((err, value) => { // Asynchronous read
+    if (err) {
+      throw err;
+    }
+  
+    solThree.write(value ^ 1, err => { // Asynchronous write
+      if (err) {
+        throw err;
+      }
 
     });
   });
@@ -36,10 +54,6 @@ const blinkLed = () => {
 };
  
 blinkLed();
-
-
-
-
 
 
 
