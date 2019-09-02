@@ -32,7 +32,7 @@ const blinkLed = () => {
     });
   });
  
-  setTimeout(blinkLed, 5000);
+  setTimeout(blinkLed, 200);
 };
  
 blinkLed();
