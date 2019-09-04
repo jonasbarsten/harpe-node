@@ -4,9 +4,9 @@ const moment = require('moment');
 const shell = require('shelljs');
 const fs = require('fs');
 const Gpio = require('onoff').Gpio;
-const solOne = new Gpio(2, 'out');
-const solTwo = new Gpio(3, 'out');
-const solThree = new Gpio(4, 'out');
+let solOne = null;
+let solTwo = null;
+let solThree = null;
  
 // Toggle the state of the LED connected to GPIO17 every 200ms
 const blinkLed = () => {
@@ -147,6 +147,9 @@ if (state.id <= 6) {
   state.type = 'ebow';
   console.log('This is a ebow module');
 } else if (state.id <= 12) {
+  solOne = new Gpio(2, 'out');
+  solTwo = new Gpio(3, 'out');
+  solThree = new Gpio(4, 'out');
   state.type = 'solenoid';
   console.log('This is a solenoid module');
 } else {
