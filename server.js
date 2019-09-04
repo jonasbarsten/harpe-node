@@ -39,7 +39,8 @@ io.on('connection', (client) => {
   });
   client.on('solenoid', (number, value) => {
     const numberOffset = number + 2;
-    localGpio[toString(numberOffset)].writeSync(value);
+    const numberAsString = numberOffset.toString();
+    localGpio[numberAsString].writeSync(value);
     // const solenoid = new Gpio(numberOffset, 'out');
     // solenoid.writeSync(value);
   });
