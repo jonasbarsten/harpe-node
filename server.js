@@ -139,7 +139,7 @@ osc.listen((message, info) => {
     }
   };
 
-  const validIncommingDepartments = ['pwm', 'ping', 'update', 'ip', 'type'];
+  const validIncommingDepartments = ['pwm', 'ping', 'update', 'ip', 'type', 'gpio'];
 
   if (validIncommingDepartments.indexOf(department) == -1) {
     return;
