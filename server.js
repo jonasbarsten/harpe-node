@@ -4,9 +4,9 @@ const moment = require('moment');
 const shell = require('shelljs');
 const fs = require('fs');
 const Gpio = require('onoff').Gpio;
-let solOne = null;
-let solTwo = null;
-let solThree = null;
+// let solOne = null;
+// let solTwo = null;
+// let solThree = null;
  
 // Toggle the state of the LED connected to GPIO17 every 200ms
 // const blinkLed = () => {
@@ -82,6 +82,11 @@ io.on('connection', (client) => {
     const scaledValue = value / 1000;
     pwm.rotate(channel, scaledValue);
   });
+  client.on('solenoid', (number, value) => {
+    const numberOffset = number + 2;
+    const solenoid = new Gpio(numberOffset, 'out');
+    solenoid.writeSync(value);
+  });
   client.on('restart', () => {
     shell.exec('sudo reboot');
   });
@@ -147,9 +152,9 @@ if (state.id <= 6) {
   state.type = 'ebow';
   console.log('This is a ebow module');
 } else if (state.id <= 12) {
-  solOne = new Gpio(2, 'out');
-  solTwo = new Gpio(3, 'out');
-  solThree = new Gpio(4, 'out');
+  // solOne = new Gpio(2, 'out');
+  // solTwo = new Gpio(3, 'out');
+  // solThree = new Gpio(4, 'out');
   state.type = 'solenoid';
   console.log('This is a solenoid module');
 } else {
