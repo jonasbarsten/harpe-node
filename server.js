@@ -4,58 +4,6 @@ const moment = require('moment');
 const shell = require('shelljs');
 const fs = require('fs');
 const Gpio = require('onoff').Gpio;
-// let solOne = null;
-// let solTwo = null;
-// let solThree = null;
- 
-// Toggle the state of the LED connected to GPIO17 every 200ms
-// const blinkLed = () => {
- 
-//   solOne.read((err, value) => { // Asynchronous read
-//     if (err) {
-//       throw err;
-//     }
- 
-//     solOne.write(value ^ 1, err => { // Asynchronous write
-//       if (err) {
-//         throw err;
-//       }
-
-//     });
-//   });
-
-//   solTwo.read((err, value) => { // Asynchronous read
-//     if (err) {
-//       throw err;
-//     }
-  
-//     solTwo.write(value ^ 1, err => { // Asynchronous write
-//       if (err) {
-//         throw err;
-//       }
-
-//     });
-//   });
-
-//   solThree.read((err, value) => { // Asynchronous read
-//     if (err) {
-//       throw err;
-//     }
-  
-//     solThree.write(value ^ 1, err => { // Asynchronous write
-//       if (err) {
-//         throw err;
-//       }
-
-//     });
-//   });
- 
-//   setTimeout(blinkLed, 200);
-// };
- 
-// blinkLed();
-
-
 
 const osc = require('./modules/osc.js');
 // const midi = require('./modules/midi.js');
@@ -75,9 +23,6 @@ const oscError = (msg) => {
 };
 
 io.on('connection', (client) => {
-  // client.on('runFunction', (functionName, args) => {
-  //   ledController[functionName](...args);
-  // });
   client.on('pwm', (channel, value) => {
     const scaledValue = value / 1000;
     pwm.rotate(channel, scaledValue);
@@ -152,28 +97,11 @@ if (state.id <= 6) {
   state.type = 'ebow';
   console.log('This is a ebow module');
 } else if (state.id <= 12) {
-  // solOne = new Gpio(2, 'out');
-  // solTwo = new Gpio(3, 'out');
-  // solThree = new Gpio(4, 'out');
   state.type = 'solenoid';
   console.log('This is a solenoid module');
 } else {
   console.log('Not a valid ID');
 }
-
-// setTimeout(() => {
-//   midi.ccListen((controller, value) => {
-//     // Compass
-//     if (controller == 1) {
-//       osc.send(`/puff/${state.localIp}/orientation`, [
-//         {
-//           type: "f",
-//           value: value * 360
-//         }
-//       ]);
-//     };
-//   });
-// }, 8000);
 
 osc.listen((message, info) => {
   state.lastOsc = {message, info};
@@ -181,7 +109,7 @@ osc.listen((message, info) => {
   const messageArray = message.address.split("/");
   const item = messageArray[1] // harp
   const id = messageArray[2]; // 1, 2, 3, 4, 5 ...
-  const department = messageArray[3]; // pwm, ping, update, ip, type
+  const department = messageArray[3]; // pwm, ping, update, ip, type, gpio
   const subId = messageArray[4]; // 1, 2, 3, 4, 5 ...
   let value = null;
 
@@ -264,6 +192,12 @@ osc.listen((message, info) => {
   if (department == 'pwm') {
     const channel = subId ? subId : 0;
     pwm.rotate(channel, value);
+  }
+
+  if (department == 'gpio') {
+    const number = subId ? subId : 0;
+    const solenoid = new Gpio(number, 'out');
+    solenoid.writeSync(value);
   }
 
   if (department == 'update') {
