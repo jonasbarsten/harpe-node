@@ -9,51 +9,51 @@ let solTwo = null;
 let solThree = null;
  
 // Toggle the state of the LED connected to GPIO17 every 200ms
-const blinkLed = () => {
+// const blinkLed = () => {
  
-  solOne.read((err, value) => { // Asynchronous read
-    if (err) {
-      throw err;
-    }
+//   solOne.read((err, value) => { // Asynchronous read
+//     if (err) {
+//       throw err;
+//     }
  
-    solOne.write(value ^ 1, err => { // Asynchronous write
-      if (err) {
-        throw err;
-      }
+//     solOne.write(value ^ 1, err => { // Asynchronous write
+//       if (err) {
+//         throw err;
+//       }
 
-    });
-  });
+//     });
+//   });
 
-  solTwo.read((err, value) => { // Asynchronous read
-    if (err) {
-      throw err;
-    }
+//   solTwo.read((err, value) => { // Asynchronous read
+//     if (err) {
+//       throw err;
+//     }
   
-    solTwo.write(value ^ 1, err => { // Asynchronous write
-      if (err) {
-        throw err;
-      }
+//     solTwo.write(value ^ 1, err => { // Asynchronous write
+//       if (err) {
+//         throw err;
+//       }
 
-    });
-  });
+//     });
+//   });
 
-  solThree.read((err, value) => { // Asynchronous read
-    if (err) {
-      throw err;
-    }
+//   solThree.read((err, value) => { // Asynchronous read
+//     if (err) {
+//       throw err;
+//     }
   
-    solThree.write(value ^ 1, err => { // Asynchronous write
-      if (err) {
-        throw err;
-      }
+//     solThree.write(value ^ 1, err => { // Asynchronous write
+//       if (err) {
+//         throw err;
+//       }
 
-    });
-  });
+//     });
+//   });
  
-  setTimeout(blinkLed, 200);
-};
+//   setTimeout(blinkLed, 200);
+// };
  
-blinkLed();
+// blinkLed();
 
 
 
