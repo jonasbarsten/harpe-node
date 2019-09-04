@@ -41,8 +41,6 @@ io.on('connection', (client) => {
     const numberOffset = number + 2;
     const numberAsString = numberOffset.toString();
     localGpio[numberAsString].writeSync(value);
-    // const solenoid = new Gpio(numberOffset, 'out');
-    // solenoid.writeSync(value);
   });
   client.on('restart', () => {
     shell.exec('sudo reboot');
@@ -208,8 +206,11 @@ osc.listen((message, info) => {
 
   if (department == 'gpio') {
     const number = subId ? subId : 0;
-    const solenoid = new Gpio(number, 'out');
-    solenoid.writeSync(value);
+    // const solenoid = new Gpio(number, 'out');
+    // solenoid.writeSync(value);
+    const numberOffset = number + 2;
+    const numberAsString = numberOffset.toString();
+    localGpio[numberAsString].writeSync(value);
   }
 
   if (department == 'update') {
