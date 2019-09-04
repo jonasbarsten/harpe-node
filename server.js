@@ -131,7 +131,8 @@ let state = {
   lastOsc: {},
   localIp: getIp(),
   hostName: os.hostname(),
-  neighbours: []
+  neighbours: [],
+  type: null
 };
 
 console.log(`Harp ID: ${state.id}`);
@@ -143,8 +144,10 @@ if (state.id == 0) {
 
 if (state.id <= 6) {
   pwm = require('./modules/pwm.js');
+  state.type = 'ebow';
   console.log('This is a ebow module');
 } else if (state.id <= 12) {
+  state.type = 'solenoid';
   console.log('This is a solenoid module');
 } else {
   console.log('Not a valid ID');
@@ -170,7 +173,7 @@ osc.listen((message, info) => {
   const messageArray = message.address.split("/");
   const item = messageArray[1] // harp
   const id = messageArray[2]; // 1, 2, 3, 4, 5 ...
-  const department = messageArray[3]; // pwm, ping, update, ip
+  const department = messageArray[3]; // pwm, ping, update, ip, type
   const subId = messageArray[4]; // 1, 2, 3, 4, 5 ...
   let value = null;
 
@@ -186,7 +189,7 @@ osc.listen((message, info) => {
     }
   };
 
-  const validIncommingDepartments = ['pwm', 'ping', 'update', 'ip'];
+  const validIncommingDepartments = ['pwm', 'ping', 'update', 'ip', 'type'];
 
   if (validIncommingDepartments.indexOf(department) == -1) {
     return;
@@ -224,7 +227,24 @@ osc.listen((message, info) => {
       state.neighbours[position].ip = value;
     };
     return;
-  }
+  };
+
+  if (department == 'type') {
+
+    const position = state.neighbours.map((neighbour) => { 
+      return neighbour.id; 
+    }).indexOf(id);
+
+    if (position == -1) {
+      state.neighbours.push({
+        id: id,
+        type: value
+      });
+    } else {
+      state.neighbours[position].type = value;
+    };
+    return;
+  };
 
   // Break if message isn't intended for current server
   if (state.id != id || item != 'harp') {
@@ -261,6 +281,13 @@ setInterval(() => {
     {
       type: "s",
       value: state.localIp
+    }
+  ]);
+
+  osc.send(`/harp/${state.id}/type`, [
+    {
+      type: "s",
+      value: state.type
     }
   ]);
 
