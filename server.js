@@ -34,13 +34,17 @@ const oscError = (msg) => {
 
 io.on('connection', (client) => {
   client.on('pwm', (channel, value) => {
-    const scaledValue = value / 1000;
-    pwm.rotate(channel, scaledValue);
+    if (state.type === 'ebow') {
+      const scaledValue = value / 1000;
+      pwm.rotate(channel, scaledValue);
+    }
   });
   client.on('solenoid', (number, value) => {
-    const numberOffset = number + 2;
-    const numberAsString = numberOffset.toString();
-    localGpio[numberAsString].writeSync(value);
+    if (state.type === 'solenoid') {
+      const numberOffset = number + 2;
+      const numberAsString = numberOffset.toString();
+      localGpio[numberAsString].writeSync(value);
+    }
   });
   client.on('restart', () => {
     shell.exec('sudo reboot');
@@ -200,17 +204,19 @@ osc.listen((message, info) => {
   };
 
   if (department == 'pwm') {
-    const channel = subId ? subId : 0;
-    pwm.rotate(channel, value);
+    if (state.type === 'ebow') {
+      const channel = subId ? subId : 0;
+      pwm.rotate(channel, value);
+    }
   }
 
   if (department == 'gpio') {
-    const number = subId ? subId : 0;
-    // const solenoid = new Gpio(number, 'out');
-    // solenoid.writeSync(value);
-    const numberOffset = number + 2;
-    const numberAsString = numberOffset.toString();
-    localGpio[numberAsString].writeSync(value);
+    if (state.type === 'solenoid') {
+      const number = subId ? subId : 0;
+      const numberOffset = number + 2;
+      const numberAsString = numberOffset.toString();
+      localGpio[numberAsString].writeSync(value);
+    }
   }
 
   if (department == 'update') {
