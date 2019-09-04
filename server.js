@@ -39,8 +39,9 @@ io.on('connection', (client) => {
   });
   client.on('solenoid', (number, value) => {
     const numberOffset = number + 2;
-    const solenoid = new Gpio(numberOffset, 'out');
-    solenoid.writeSync(value);
+    localGpio[toString(numberOffset)].writeSync(value);
+    // const solenoid = new Gpio(numberOffset, 'out');
+    // solenoid.writeSync(value);
   });
   client.on('restart', () => {
     shell.exec('sudo reboot');
