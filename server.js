@@ -213,8 +213,8 @@ osc.listen((message, info) => {
   if (department == 'gpio') {
     if (state.type === 'solenoid') {
       const number = subId ? subId : 0;
-      const numberOffset = number + 2;
-      const numberAsString = numberOffset.toString();
+      // const numberOffset = number + 2;
+      const numberAsString = number.toString();
       localGpio[numberAsString].writeSync(value);
     }
   }
