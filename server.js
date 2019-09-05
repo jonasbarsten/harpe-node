@@ -3,17 +3,17 @@ const os = require('os');
 const moment = require('moment');
 const shell = require('shelljs');
 const fs = require('fs');
-// const Gpio = require('onoff').Gpio;
+const Gpio = require('onoff').Gpio;
 
 const osc = require('./modules/osc.js');
 // const midi = require('./modules/midi.js');
 const pwm = require('./modules/pwm.js');
 
-// let localGpio = {
-//   '2': null,
-//   '3': null,
-//   '4': null
-// };
+let localGpio = {
+  '2': null,
+  '3': null,
+  '4': null
+};
 
 const update = () => {
   shell.exec('cd /home/pi/harpe-node && git pull && npm install && cd /home/pi/harpe-client && git pull && sudo reboot');
