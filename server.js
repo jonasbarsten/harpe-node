@@ -214,13 +214,13 @@ osc.listen((message, info) => {
     }
   }
 
-  // if (department == 'gpio') {
-  //   if (state.type === 'solenoid') {
-  //     const number = subId ? subId : 0;
-  //     const numberAsString = number.toString();
-  //     localGpio[numberAsString].writeSync(value);
-  //   }
-  // }
+  if (department == 'gpio') {
+    if (state.type === 'solenoid') {
+      const number = subId ? subId : 0;
+      const numberAsString = number.toString();
+      localGpio[numberAsString].writeSync(value);
+    }
+  }
 
   if (department == 'update') {
     update();
