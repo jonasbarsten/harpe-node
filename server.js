@@ -4,6 +4,7 @@ const moment = require('moment');
 const shell = require('shelljs');
 const fs = require('fs');
 const Gpio = require('onoff').Gpio;
+let pwmOffset = 0;
 
 const osc = require('./modules/osc.js');
 // const midi = require('./modules/midi.js');
@@ -32,7 +33,8 @@ io.on('connection', (client) => {
   client.on('pwm', (channel, value) => {
     if (state.type === 'ebow') {
       const scaledValue = value / 1000;
-      pwm.rotate(channel, scaledValue);
+      const newChannel = channel + pwmOffset;
+      pwm.rotate(newChannel, scaledValue);
     }
   });
   client.on('solenoid', (number, value) => {
@@ -100,6 +102,10 @@ console.log(`Harp IP: ${state.localIp}`);
 
 if (state.id == 0) {
   console.log('Set harp ID! (in /home/pi/id)');
+};
+
+if (state.id === 1) {
+  pwmOffset = 8;
 };
 
 if (state.id <= 6) {
@@ -210,7 +216,8 @@ osc.listen((message, info) => {
   if (department == 'pwm') {
     if (state.type === 'ebow') {
       const channel = subId ? subId : 0;
-      pwm.rotate(channel, value);
+      const newChannel = channel + pwmOffset;
+      pwm.rotate(newChannel, value);
     }
   }
 
