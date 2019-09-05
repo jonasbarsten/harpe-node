@@ -107,16 +107,16 @@ if (state.id <= 6) {
   state.type = 'ebow';
   console.log('This is a ebow module');
 } else if (state.id <= 12) {
-  localGpio = {
-    '2': new Gpio(2, 'out'),
-    '3': new Gpio(3, 'out'),
-    '4': new Gpio(4, 'out')
-  };
-  localGpio['2'].writeSync(0);
-  localGpio['3'].writeSync(0);
-  localGpio['4'].writeSync(0);
-  state.type = 'solenoid';
-  console.log('This is a solenoid module');
+  // localGpio = {
+  //   '2': new Gpio(2, 'out'),
+  //   '3': new Gpio(3, 'out'),
+  //   '4': new Gpio(4, 'out')
+  // };
+  // localGpio['2'].writeSync(0);
+  // localGpio['3'].writeSync(0);
+  // localGpio['4'].writeSync(0);
+  // state.type = 'solenoid';
+  // console.log('This is a solenoid module');
 } else {
   console.log('Not a valid ID');
 }
