@@ -33,7 +33,7 @@ io.on('connection', (client) => {
   client.on('pwm', (channel, value) => {
     if (state.type === 'ebow') {
       const scaledValue = value / 1000;
-      const newChannel = channel + pwmOffset;
+      const newChannel = Number(channel) + pwmOffset;
       pwm.rotate(newChannel, scaledValue);
     }
   });
@@ -216,7 +216,7 @@ osc.listen((message, info) => {
   if (department == 'pwm') {
     if (state.type === 'ebow') {
       const channel = subId ? subId : 0;
-      const newChannel = channel + pwmOffset;
+      const newChannel = Number(channel) + pwmOffset;
       pwm.rotate(newChannel, value);
     }
   }
