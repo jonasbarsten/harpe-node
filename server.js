@@ -9,22 +9,18 @@ const osc = require('./modules/osc.js');
 // const midi = require('./modules/midi.js');
 let pwm = null;
 
-const localGpio = {
-  '2': new Gpio(2, 'out'),
-  '3': new Gpio(3, 'out'),
-  '4': new Gpio(4, 'out')
+let localGpio = {
+  '2': null,
+  '3': null,
+  '4': null
 };
-
-localGpio['2'].writeSync(0);
-localGpio['3'].writeSync(0);
-localGpio['4'].writeSync(0);
 
 const update = () => {
   shell.exec('cd /home/pi/harpe-node && git pull && npm install && cd /home/pi/harpe-client && git pull && sudo reboot');
 };
 
 const oscError = (msg) => {
-  osc.send(`/harp/${state.localIp}/error`, [
+  osc.send(`/harp/${state.id}/error`, [
     {
       type: "s",
       value: msg
@@ -111,6 +107,14 @@ if (state.id <= 6) {
   state.type = 'ebow';
   console.log('This is a ebow module');
 } else if (state.id <= 12) {
+  localGpio = {
+    '2': new Gpio(2, 'out'),
+    '3': new Gpio(3, 'out'),
+    '4': new Gpio(4, 'out')
+  };
+  localGpio['2'].writeSync(0);
+  localGpio['3'].writeSync(0);
+  localGpio['4'].writeSync(0);
   state.type = 'solenoid';
   console.log('This is a solenoid module');
 } else {
