@@ -7,7 +7,7 @@ const fs = require('fs');
 
 const osc = require('./modules/osc.js');
 // const midi = require('./modules/midi.js');
-let pwm = null;
+const pwm = require('./modules/pwm.js');
 
 // let localGpio = {
 //   '2': null,
@@ -103,7 +103,7 @@ if (state.id == 0) {
 };
 
 if (state.id <= 6) {
-  pwm = require('./modules/pwm.js');
+  // pwm = require('./modules/pwm.js');
   state.type = 'ebow';
   console.log('This is a ebow module');
 } else if (state.id <= 12) {
