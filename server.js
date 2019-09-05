@@ -89,6 +89,7 @@ const getIp = () => {
 
 let state = {
   id: Number(fs.readFileSync('/home/pi/id', 'utf8').split(/\n/g)[0]) || 0,
+  version: Number(fs.readFileSync('/home/pi/harpe-node/version', 'utf8').split(/\n/g)[0]) || 0,
   lastMidi: {},
   lastOsc: {},
   localIp: getIp(),
@@ -149,7 +150,7 @@ osc.listen((message, info) => {
     }
   };
 
-  const validIncommingDepartments = ['pwm', 'ping', 'update', 'ip', 'type', 'gpio'];
+  const validIncommingDepartments = ['pwm', 'ping', 'update', 'ip', 'type', 'gpio', 'version'];
 
   if (validIncommingDepartments.indexOf(department) == -1) {
     return;
@@ -202,6 +203,23 @@ osc.listen((message, info) => {
       });
     } else {
       state.neighbours[position].type = value;
+    };
+    return;
+  };
+
+  if (department == 'version') {
+
+    const position = state.neighbours.map((neighbour) => { 
+      return neighbour.id; 
+    }).indexOf(id);
+
+    if (position == -1) {
+      state.neighbours.push({
+        id: id,
+        version: value
+      });
+    } else {
+      state.neighbours[position].version = value;
     };
     return;
   };
@@ -259,6 +277,13 @@ setInterval(() => {
     {
       type: "s",
       value: state.type
+    }
+  ]);
+
+  osc.send(`/harp/${state.id}/version`, [
+    {
+      type: "s",
+      value: state.version
     }
   ]);
 
