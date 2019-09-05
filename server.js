@@ -3,17 +3,17 @@ const os = require('os');
 const moment = require('moment');
 const shell = require('shelljs');
 const fs = require('fs');
-const Gpio = require('onoff').Gpio;
+// const Gpio = require('onoff').Gpio;
 
 const osc = require('./modules/osc.js');
 // const midi = require('./modules/midi.js');
 let pwm = null;
 
-let localGpio = {
-  '2': null,
-  '3': null,
-  '4': null
-};
+// let localGpio = {
+//   '2': null,
+//   '3': null,
+//   '4': null
+// };
 
 const update = () => {
   shell.exec('cd /home/pi/harpe-node && git pull && npm install && cd /home/pi/harpe-client && git pull && sudo reboot');
@@ -35,13 +35,13 @@ io.on('connection', (client) => {
       pwm.rotate(channel, scaledValue);
     }
   });
-  client.on('solenoid', (number, value) => {
-    if (state.type === 'solenoid') {
-      const numberOffset = number + 2;
-      const numberAsString = numberOffset.toString();
-      localGpio[numberAsString].writeSync(value);
-    }
-  });
+  // client.on('solenoid', (number, value) => {
+  //   if (state.type === 'solenoid') {
+  //     const numberOffset = number + 2;
+  //     const numberAsString = numberOffset.toString();
+  //     localGpio[numberAsString].writeSync(value);
+  //   }
+  // });
   client.on('restart', () => {
     shell.exec('sudo reboot');
   });
@@ -214,14 +214,13 @@ osc.listen((message, info) => {
     }
   }
 
-  if (department == 'gpio') {
-    if (state.type === 'solenoid') {
-      const number = subId ? subId : 0;
-      // const numberOffset = number + 2;
-      const numberAsString = number.toString();
-      localGpio[numberAsString].writeSync(value);
-    }
-  }
+  // if (department == 'gpio') {
+  //   if (state.type === 'solenoid') {
+  //     const number = subId ? subId : 0;
+  //     const numberAsString = number.toString();
+  //     localGpio[numberAsString].writeSync(value);
+  //   }
+  // }
 
   if (department == 'update') {
     update();
